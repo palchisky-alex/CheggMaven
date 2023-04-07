@@ -1,9 +1,8 @@
 pipeline
 {
-    agent { docker { image 'mcr.microsoft.com/playwright/java:v1.32.0-focal' } }
+    agent any
 
     tools {
-        // Install the Maven version configured as "M3" and add it to the path.
         maven "3.8.1"
     }
 
@@ -14,6 +13,7 @@ pipeline
             steps
             {
                  git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh 'docker run -it --rm mcr.microsoft.com/playwright/java:v1.32.0-focal /bin/bash'
                  sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
             post
