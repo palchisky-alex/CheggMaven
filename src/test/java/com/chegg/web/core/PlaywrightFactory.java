@@ -1,9 +1,12 @@
 package com.chegg.web.core;
-
 import com.microsoft.playwright.*;
+import io.qameta.allure.Allure;
 import org.testng.ITestResult;
-
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -58,13 +61,35 @@ public class PlaywrightFactory {
         return getTlPage();
     }
 
-    public void stop(Method testInfo) {
-        String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy_MM"));
+    public void stop(Method testInfo, ITestResult result) throws IOException {
+
+        String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy_MM_dd-HH_mm"));
 
         String traceName = String.format("%s_%s", formattedDateTime, testInfo.getName());
+        String screenPathStr = "src/test/resources/" + traceName + ".zip";
+        String tracePathStr = "src/test/resources/" + traceName + ".zip";
+        Path screenFilePath = Paths.get(screenPathStr);
+        Path zipFilePath = Paths.get(tracePathStr);
+
+
         getTlContext().tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("src/test/resources/" + traceName + ".zip")));
+                .setPath(zipFilePath));
+
+        byte[] zipContents = Files.readAllBytes(zipFilePath);
+        Allure.addAttachment("TRACE_" + traceName,
+                new ByteArrayInputStream(zipContents));
+
+        if (result.getStatus() == 2) {
+            byte[] screenshot = getTlPage().screenshot(new Page.ScreenshotOptions()
+                    .setPath(screenFilePath).setFullPage(true));
+
+            Allure.addAttachment("SCREENSHOT_" + traceName,
+                    new ByteArrayInputStream(screenshot));
+        }
+
         getTlContext().close();
         getTlBrowser().close();
     }
+
+
 }

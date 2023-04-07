@@ -59,14 +59,15 @@ public class GoogleTranslatePage extends BasePage {
         System.out.println("detectLanguage after " + detectLanguage);
     }
 
+
     public TranslateTextsPage translateText() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile("Text", Pattern.CASE_INSENSITIVE))).click();
         return new TranslateTextsPage(page);
     }
 
-    public ImagesPage translateImage() {
+    public TranslateImage translateImage() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile("Image", Pattern.CASE_INSENSITIVE))).click();
-        return new ImagesPage(page);
+        return new TranslateImage(page);
     }
 
     public TranslateSitesPage translateSite() {

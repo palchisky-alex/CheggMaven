@@ -16,9 +16,6 @@ public class TranslateSitesPage {
             page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Translate website")).click();
             page.waitForTimeout(5000);
         });
-
-
-
         return new SiteForTranslatePage(page1);
     }
 

@@ -1,19 +1,21 @@
 package com.chegg.web.core;
 
-import com.chegg.web.pages.GoogleTranslatePage;
-import com.chegg.web.pages.HomePage;
-import com.chegg.web.pages.TranslateSitesPage;
+import com.chegg.web.pages.*;
 import com.microsoft.playwright.Page;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 public class BaseTest {
     PlaywrightFactory pf;
     public Page page;
     protected HomePage app;
-    protected GoogleTranslatePage googleTranslatePage;
+    protected GoogleTranslatePage google;
     protected TranslateSitesPage translateSites;
+    protected TranslateTextsPage translateTexts;
+    protected TranslateImage translateImage;
 
     @BeforeMethod
     public void setUp() {
@@ -25,8 +27,8 @@ public class BaseTest {
 
 
     @AfterMethod
-    public void tearDown(Method testInfo){
-        pf.stop(testInfo);
+    public void tearDown(Method testInfo, ITestResult iTestResult) throws IOException {
+        pf.stop(testInfo, iTestResult);
 
     }
 }

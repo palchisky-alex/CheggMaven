@@ -9,11 +9,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ImagesPage {
+public class TranslateImage {
     Page page;
 
-    public ImagesPage(Page page) {
+    public TranslateImage(Page page) {
         this.page = page;
+    }
+
+    public TranslateImage setDetectLang() {
+        if(!isButtonDetectedLangSelected().equals("true")) {
+            page.locator("(//button[@data-language-code='auto'])[1]").click();
+        }
+        return this;
+    }
+
+    private String isButtonDetectedLangSelected() {
+        String detectLanguage = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Detect language")).getAttribute("aria-selected");
+        System.out.println("detectLanguage " + detectLanguage);
+        return detectLanguage;
     }
 
     public boolean loadImage() {
