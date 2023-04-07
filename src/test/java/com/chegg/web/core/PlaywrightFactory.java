@@ -40,7 +40,7 @@ public class PlaywrightFactory {
 
         tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome")
                 .setSlowMo(0)
-                .setHeadless(false)));
+                .setHeadless(true)));
 
         tlContext.set(getTlBrowser().newContext(new Browser.NewContextOptions()
 //                .setLocale("de-DE")
