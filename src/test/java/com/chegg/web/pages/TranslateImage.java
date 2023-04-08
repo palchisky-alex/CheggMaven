@@ -1,46 +1,55 @@
 package com.chegg.web.pages;
 
+import com.chegg.web.core.BasePage;
 import com.microsoft.playwright.Download;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TranslateImage {
-    Page page;
+    private Page page;
+    private BasePage el;
+    private String btnDetectLang = "(//button[@data-language-code='auto'])[1]";
+    private String imageForTranslationPath = "src/test/resources/translate.jpg";
+    private String downloadedFilePath = "src/test/resources/translate_"+Math.random()+".jpg";
 
     public TranslateImage(Page page) {
         this.page = page;
+        el = new BasePage(page);
     }
 
     public TranslateImage setDetectLang() {
         if(!isButtonDetectedLangSelected().equals("true")) {
-            page.locator("(//button[@data-language-code='auto'])[1]").click();
+            el.clickBy(btnDetectLang);
         }
         return this;
     }
 
     private String isButtonDetectedLangSelected() {
-        String detectLanguage = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Detect language")).getAttribute("aria-selected");
-        System.out.println("detectLanguage " + detectLanguage);
-        return detectLanguage;
+        return el.getByRole(AriaRole.TAB, "Detect language").getAttribute("aria-selected");
     }
 
-    public boolean loadImage() {
-        Locator locator = page.getByRole(AriaRole.MAIN, new Page.GetByRoleOptions().setName("Image translation")).getByText("Browse your computer");
-        locator.setInputFiles(Paths.get("src/test/resources/translate.jpg"));
-        return page.locator("img[alt=\"ДОМ\"]").isVisible();
+    public TranslateImage loadImage() {
+        el.getByRole(AriaRole.MAIN, "Image translation")
+                .getByText("Browse your computer")
+                .setInputFiles(Paths.get(imageForTranslationPath));;
+        el.waitForTimeout(2000);
+        return this;
+    }
+
+    public boolean isTranslationEqualsTo(String word) {
+        return el.getLocator("img[alt='"+word+"']").isVisible();
     }
 
     public boolean downloadTranslation() {
         Download downloadedFile = page.waitForDownload(() -> {
-                page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download translation")).click();
+                el.getByRole(AriaRole.BUTTON, "Download translation").click();
         });
         Path filePath = downloadedFile.path();
-        downloadedFile.saveAs(Paths.get("src/test/resources/translate_"+Math.random()+".jpg"));
+        downloadedFile.saveAs(Paths.get(downloadedFilePath));
 
         if (Files.exists(filePath)) {
             System.out.println("Download successful: " + filePath.toAbsolutePath());
