@@ -1,9 +1,9 @@
 pipeline
 {
-    agent { docker { image 'mcr.microsoft.com/playwright/java:v1.32.0-focal' } }
+    agent any
 
     tools{
-    	maven "3.8.1"
+    	maven 'maven'
         }
 
     stages
@@ -37,7 +37,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/palchitsky-alex/CheggMaven.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml"
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/test_suite.xml"
 
                 }
             }
