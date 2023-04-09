@@ -5,6 +5,7 @@ import com.chegg.web.core.utill.LangList;
 import com.chegg.web.pages.SiteForTranslatePage;
 import com.chegg.web.pages.SourceLangPage;
 import com.chegg.web.pages.TargetLangPage;
+import com.chegg.web.pages.TranslateTextsPage;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -30,7 +31,7 @@ public class GoogleTranslateTest extends BaseTest {
             translateTexts = google.translateText();
 
             step("Open Source Language list", () -> {
-                SourceLangPage srcLang = google.openSourceLangList();
+                SourceLangPage srcLang = translateTexts.openSourceLangList();
 
                 step("Search for the desired language and choose it", () -> {
                     boolean isSourceClosed = srcLang.searchLangAndPick(lFrom);
@@ -38,7 +39,7 @@ public class GoogleTranslateTest extends BaseTest {
                 });
             });
             step("Open Target Language list", () -> {
-                TargetLangPage trgList = google.openTargetLangList();
+                TargetLangPage trgList = translateTexts.openTargetLangList();
 
                 step("Search for the desired language and choose it", () -> {
                     boolean isTargetClosed = trgList.searchLangAndPick(lTo);
@@ -78,7 +79,7 @@ public class GoogleTranslateTest extends BaseTest {
                 translateImage.setDetectLang();
             });
             step("Open Target Language list", () -> {
-                TargetLangPage trgList = google.openTargetLangList();
+                TargetLangPage trgList = translateImage.openTargetLangList();
 
                 step("Search for the desired language and choose it", () -> {
                     boolean isTargetClosed = trgList.searchLangAndPick(toLang);
@@ -120,7 +121,7 @@ public class GoogleTranslateTest extends BaseTest {
             translateSites = google.translateSite();
 
             step("Open Source Language list", () -> {
-                SourceLangPage srcLang = google.openSourceLangList();
+                SourceLangPage srcLang = translateSites.openSourceLangList();
 
                 step("Search for the desired language and choose it", () -> {
                     boolean isSourceClosed = srcLang.searchLangAndPick(LangList.English);
@@ -131,7 +132,7 @@ public class GoogleTranslateTest extends BaseTest {
                 });
             });
             step("Open Target Language list", () -> {
-                TargetLangPage trgList = google.openTargetLangList();
+                TargetLangPage trgList = translateSites.openTargetLangList();
 
                 step("Search for the desired language and choose it", () -> {
                     boolean isTargetClosed = trgList.searchLangAndPick(LangList.Spanish);
@@ -155,6 +156,40 @@ public class GoogleTranslateTest extends BaseTest {
         });
     }
 
+    @Test
+    public void testChegg() {
+        google = app.navigate().toGoogleTranslateSite();
+        translateTexts = google.translateText();
+
+        boolean isClosed = translateTexts.openTargetLangList()
+                .searchLangAndPick(LangList.Hebrew);
+
+        assertThat(isClosed).as("Lang  target windows is closed").isFalse();
+
+        boolean isClosed2 = translateTexts.openSourceLangList().searchLangAndPick(LangList.Spanish);
+        assertThat(isClosed2).as("Lang source windows is closed").isFalse();
+
+
+        translateTexts.typeText("DOG").pressAnyKeyboardKey(Keys.Shift);
+        assertThat(translateTexts.translationResult()).as("").isEqualTo("DOG");
+
+
+    }
+
+    @Test(description = "Translate typed Text")
+    @AllureId("1")
+    @Owner("admin")
+    public void testName() {
+        step("Navigate to https://translate.google.com");
+        step("Init translate text", () -> {
+            step("Open Source Language list");
+            step("Search for the desired language and choose it");
+            step("Open Target Language list");
+            step("Search for the desired language and choose it");
+            step("Type text in the selected language");
+            step("Verify translation");
+        });
+    }
 
     @DataProvider(name = "translate_data")
     public Object[][] testData() {

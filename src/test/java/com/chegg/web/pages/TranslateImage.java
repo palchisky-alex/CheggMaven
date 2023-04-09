@@ -21,6 +21,16 @@ public class TranslateImage {
         el = new BasePage(page);
     }
 
+    public SourceLangPage openSourceLangList() {
+        el.getByRole(AriaRole.BUTTON, "More source languages").click();
+        return new SourceLangPage(page);
+    }
+
+    public TargetLangPage openTargetLangList() {
+        el.getByRole(AriaRole.BUTTON, "More target languages").click();
+        return new TargetLangPage(page);
+    }
+
     public TranslateImage setDetectLang() {
         if(!isButtonDetectedLangSelected().equals("true")) {
             el.clickBy(btnDetectLang);

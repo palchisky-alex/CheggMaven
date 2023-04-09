@@ -18,7 +18,6 @@ public class TargetLangPage {
     }
 
 
-
     public boolean searchLangAndPick(LangList lang)  {
         searchLangInput.fill(lang.name());
         el.clickBy("//span[contains(text(), '"+lang.name()+"')]/ancestor::div[@data-language-code]");

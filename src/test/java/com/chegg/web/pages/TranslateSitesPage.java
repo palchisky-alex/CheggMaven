@@ -12,6 +12,16 @@ public class TranslateSitesPage {
         el = new BasePage(page);
     }
 
+    public SourceLangPage openSourceLangList() {
+        el.getByRole(AriaRole.BUTTON, "More source languages").click();
+        return new SourceLangPage(page);
+    }
+
+    public TargetLangPage openTargetLangList() {
+        el.getByRole(AriaRole.BUTTON, "More target languages").click();
+        return new TargetLangPage(page);
+    }
+
     public SiteForTranslatePage enterSiteURLAndClick(String url) {
         el.getByRole(AriaRole.TEXTBOX,"Website").fill(url);
         Page page1 = page.waitForPopup(() -> {

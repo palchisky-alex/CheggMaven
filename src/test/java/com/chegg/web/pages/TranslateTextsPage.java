@@ -1,4 +1,5 @@
 package com.chegg.web.pages;
+
 import com.chegg.web.core.BasePage;
 import com.chegg.web.core.utill.Keys;
 import com.microsoft.playwright.Locator;
@@ -18,7 +19,17 @@ public class TranslateTextsPage {
         el = new BasePage(page);
         searchLangInput = el.getByRole(AriaRole.TEXTBOX, "Search languages");
         pick = el.getByRole(AriaRole.MAIN, "Text translation").locator("div");
-        textArea = el.getByRole(AriaRole.COMBOBOX,"Source text");
+        textArea = el.getByRole(AriaRole.COMBOBOX, "Source text");
+    }
+
+    public SourceLangPage openSourceLangList() {
+        el.getByRole(AriaRole.BUTTON, "More source languages").click();
+        return new SourceLangPage(page);
+    }
+
+    public TargetLangPage openTargetLangList() {
+        el.getByRole(AriaRole.BUTTON, "More target languages").click();
+        return new TargetLangPage(page);
     }
 
     public TranslateTextsPage typeText(String text) {
@@ -36,7 +47,6 @@ public class TranslateTextsPage {
         page.waitForTimeout(500);
         return this;
     }
-
 
 
 }
