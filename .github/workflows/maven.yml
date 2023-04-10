@@ -6,11 +6,11 @@ on:
     inputs:
       TEST_ENDPOINT: #this is used as ENV variable to provide host to run tests for
         description: "Endpoint for tests"
-        required: true
+        required: false
         default: https://dev.github.com
       TEST_BROWSER: #this is used as ENV variable to browser to run tests with
         description: "Browser for tests"
-        required: true
+        required: false
         default: chrome
       ALLURE_JOB_RUN_ID: # this will be used to generate Launch name on Allure TestOps side
         description: "Allure TestOps service parameter, leave blank"
@@ -58,7 +58,7 @@ jobs:
         env:
           ALLURE_JOB_UID: ${{steps.allure-job-uid.outputs.result}}
           TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
-          TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
+          TEST_BROWSER: chrome
 
 # name: Java CI with Maven
 
