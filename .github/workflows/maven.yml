@@ -59,6 +59,7 @@ jobs:
           ALLURE_JOB_UID: ${{steps.allure-job-uid.outputs.result}}
           TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
           TEST_BROWSER: chrome
+          PERSONAL_TOKEN: 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
 
 # name: Java CI with Maven
 
