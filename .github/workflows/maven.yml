@@ -7,16 +7,16 @@ on:
       TEST_ENDPOINT: #this is used as ENV variable to provide host to run tests for
         description: "Endpoint for tests"
         required: false
-        default: https://dev.github.com
+        default: https://github.com/palchisky-alex
       TEST_BROWSER: #this is used as ENV variable to browser to run tests with
         description: "Browser for tests"
         required: false
         default: chrome
       ALLURE_JOB_RUN_ID: # this will be used to generate Launch name on Allure TestOps side
-        description: "Allure TestOps service parameter, leave blank"
+        description: "alex"
         required: false
       ALLURE_USERNAME:
-        description: "Allure TestOps service parameter, leave blank"
+        description: admin
         required: false
 
 env:
