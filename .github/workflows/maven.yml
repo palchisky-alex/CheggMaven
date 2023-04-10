@@ -139,8 +139,8 @@ jobs:
           chmod +x ./allurectl
 #       - name: Prepare TestPlan
 #         run: ./allurectl job-run plan --output-file ${ALLURE_TESTPLAN_PATH}
-      - name: Build with Gradle
-        run: ./allurectl watch -- ./gradlew test # allows sending the test results in the real time 
+#       - name: Build with Gradle
+#         run: ./allurectl watch -- ./gradlew test # allows sending the test results in the real time 
         env:
           ALLURE_JOB_UID: ${{steps.allure-job-uid.outputs.result}}
           TEST_ENDPOINT: https://alexp.testops.cloud/
