@@ -21,7 +21,7 @@ on:
 
 env:
   ALLURE_ENDPOINT: https://alexp.testops.cloud/
-  ALLURE_TOKEN: e05057c2-28b3-4baf-97d0-25acfe942cee
+  ALLURE_TOKEN: a63a2245-2dbc-4029-a700-a5dc5722e4ac
   ALLURE_PROJECT_ID: 1
   ALLURE_TESTPLAN_PATH: "./testplan.json" # needed to filter the tests
   ALLURE_RESULTS: "allure-results" # folder with the test results
