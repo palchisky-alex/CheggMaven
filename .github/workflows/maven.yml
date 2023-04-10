@@ -33,7 +33,7 @@ on:
 
 jobs:
   build:
-
+  
     runs-on: ubuntu-latest
 
     steps:
@@ -49,13 +49,14 @@ jobs:
     - name: Run tests
       run: mvn test
       env:
-        ALLURE_ENDPOINT: "https://alexp.testops.cloud/"
-        ALLURE_TOKEN: "e05057c2-28b3-4baf-97d0-25acfe942cee"
+        ALLURE_ENDPOINT: https://alexp.testops.cloud/
+        ALLURE_TOKEN: e05057c2-28b3-4baf-97d0-25acfe942cee
         ALLURE_PROJECT_ID: 1
         ALLURE_TESTPLAN_PATH: "./testplan.json" # needed to filter the tests
         ALLURE_RESULTS: "allure-results" # folder with the test results
         ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }} 
-      
+     
+
   all-tests:
     runs-on: ubuntu-latest
     steps:
