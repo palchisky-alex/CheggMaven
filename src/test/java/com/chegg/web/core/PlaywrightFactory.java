@@ -70,8 +70,8 @@ public class PlaywrightFactory {
                 .setSources(true));
 
         tlPage.set(getTlContext().newPage());
-        getTlPage().onRequest(request -> System.out.println(">> " + request.method() + " " + request.url()));
-        getTlPage().onResponse(response -> System.out.println("<<" + response.status() + " " + response.url()));
+//         getTlPage().onRequest(request -> System.out.println(">> " + request.method() + " " + request.url()));
+//         getTlPage().onResponse(response -> System.out.println("<<" + response.status() + " " + response.url()));
         return getTlPage();
     }
 
