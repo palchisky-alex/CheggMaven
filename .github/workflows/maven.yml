@@ -109,7 +109,7 @@ jobs:
         ALLURE_PROJECT_ID: 1
         ALLURE_TESTPLAN_PATH: "./testplan.json" # needed to filter the tests
         ALLURE_RESULTS: "target/allure-results" # folder with the test results
-        ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }} 
+        ALLURE_JOB_RUN_ID: "github job"
      
 
   all-tests:
@@ -137,8 +137,8 @@ jobs:
         run: |
           wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_386 -O ./allurectl
           chmod +x ./allurectl
-      - name: Prepare TestPlan
-        run: ./allurectl job-run plan --output-file ${ALLURE_TESTPLAN_PATH}
+#       - name: Prepare TestPlan
+#         run: ./allurectl job-run plan --output-file ${ALLURE_TESTPLAN_PATH}
       - name: Build with Gradle
         run: ./allurectl watch -- ./gradlew test # allows sending the test results in the real time 
         env:
