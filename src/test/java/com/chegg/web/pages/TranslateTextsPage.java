@@ -39,7 +39,8 @@ public class TranslateTextsPage {
     }
 
     public String translationResult() {
-        return el.getInnerTextBy("[aria-live=\"polite\"]");
+        page.waitForTimeout(1000);
+        return el.getInnerTextBy("role=\"region\"] [aria-live=\"polite\"]");
     }
 
     public TranslateTextsPage pressAnyKeyboardKey(Keys key) {
