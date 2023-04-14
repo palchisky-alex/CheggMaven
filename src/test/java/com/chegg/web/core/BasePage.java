@@ -4,10 +4,10 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.regex.Pattern;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class BasePage {
     private Page page;
@@ -19,12 +19,18 @@ public class BasePage {
     public Locator getByRole(AriaRole role, String htmlText) {
         return page.getByRole(role, new Page.GetByRoleOptions().setName(Pattern.compile(htmlText, Pattern.CASE_INSENSITIVE)));
     }
+
     public void clickBy(String path) {
         page.waitForResponse(Response::ok, () -> {
             page.click(path);
-            System.out.println("GET request completed successfully");
+            System.out.println(">> api request from " + path + " completed successfully");
         });
+    }
 
+    public void clickWithCoordinate(String path, int x, int y) {
+        page.waitForResponse(Response::ok, () -> {
+            page.locator(path).click(new Locator.ClickOptions().setPosition(x, y));
+        });
     }
 
     public Locator getLocator(String path) {
@@ -34,12 +40,20 @@ public class BasePage {
     public String getInnerTextBy(String path) {
         return page.locator(path).innerText().toLowerCase().trim();
     }
-    
+
     public void waitForTimeout(int msec) {
         page.waitForTimeout(msec);
     }
 
+    public Locator getByTexts(String text) {
+        return page.getByText(Pattern.compile(text, Pattern.CASE_INSENSITIVE));
+    }
+
+    public boolean isVisible(String path) {
+        return page.locator(path).isVisible();
+    }
+
     public static String getMethodName() {
-        return Thread.currentThread().getStackTrace()[2].getMethodName();
+        return Thread.currentThread().getStackTrace()[1].getMethodName();
     }
 }

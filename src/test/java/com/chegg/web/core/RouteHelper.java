@@ -1,6 +1,6 @@
 package com.chegg.web.core;
 import com.chegg.web.core.utill.Prop;
-import com.chegg.web.pages.GoogleTranslatePage;
+import com.chegg.web.pages.MainPage;
 import com.microsoft.playwright.Page;
 import lombok.Getter;
 import org.aeonbits.owner.ConfigFactory;
@@ -17,9 +17,9 @@ public class RouteHelper {
         conf = ConfigFactory.create(Prop.class);
     }
 
-    public GoogleTranslatePage toGoogleTranslateSite() {
+    public MainPage toGoogleTranslateSite() {
         page.navigate(conf.basicHost());
-        return new GoogleTranslatePage(page);
+        return new MainPage(page);
     }
 
 }

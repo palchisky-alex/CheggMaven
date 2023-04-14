@@ -3,17 +3,13 @@ package com.chegg.web.pages;
 import com.chegg.web.core.BasePage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import static com.chegg.web.core.BasePage.getMethodName;
 
 
-public class GoogleTranslatePage  {
+public class MainPage {
     private Page page;
     private BasePage el;
 
-    public GoogleTranslatePage(Page page) {
+    public MainPage(Page page) {
         this.page = page;
         el = new BasePage(page);
     }
@@ -23,9 +19,9 @@ public class GoogleTranslatePage  {
         return new TranslateTextsPage(page);
     }
 
-    public TranslateImage translateImage() {
+    public TranslateImagePage translateImage() {
         el.getByRole(AriaRole.BUTTON,"Image").click();
-        return new TranslateImage(page);
+        return new TranslateImagePage(page);
     }
 
     public TranslateSitesPage translateSite() {

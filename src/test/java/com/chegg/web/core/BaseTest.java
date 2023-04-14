@@ -13,10 +13,6 @@ public class BaseTest {
     PlaywrightFactory pf;
     public Page page;
     protected HomePage app;
-    protected GoogleTranslatePage google;
-    protected TranslateSitesPage translateSites;
-    protected TranslateTextsPage translateTexts;
-    protected TranslateImage translateImage;
     public Prop conf;
 
     @BeforeMethod

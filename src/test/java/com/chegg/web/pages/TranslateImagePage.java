@@ -2,21 +2,20 @@ package com.chegg.web.pages;
 
 import com.chegg.web.core.BasePage;
 import com.microsoft.playwright.Download;
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class TranslateImage {
+public class TranslateImagePage {
     private Page page;
     private BasePage el;
     private String btnDetectLang = "(//button[@data-language-code='auto'])[1]";
     private String imageForTranslationPath = "src/test/resources/translate.jpg";
     private String downloadedFilePath = "src/test/resources/translate_"+Math.random()+".jpg";
 
-    public TranslateImage(Page page) {
+    public TranslateImagePage(Page page) {
         this.page = page;
         el = new BasePage(page);
     }
@@ -31,7 +30,7 @@ public class TranslateImage {
         return new TargetLangPage(page);
     }
 
-    public TranslateImage setDetectLang() {
+    public TranslateImagePage setDetectLang() {
         if(!isButtonDetectedLangSelected().equals("true")) {
             el.clickBy(btnDetectLang);
         }
@@ -42,7 +41,7 @@ public class TranslateImage {
         return el.getByRole(AriaRole.TAB, "Detect language").getAttribute("aria-selected");
     }
 
-    public TranslateImage loadImage() {
+    public TranslateImagePage loadImage() {
         el.getByRole(AriaRole.MAIN, "Image translation")
                 .getByText("Browse your computer")
                 .setInputFiles(Paths.get(imageForTranslationPath));;
