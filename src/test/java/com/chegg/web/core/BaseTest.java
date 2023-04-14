@@ -21,16 +21,6 @@ public class BaseTest {
     protected HomePage app;
     public Prop conf;
 
-    @BeforeSuite
-    void setEnv() {
-        allureEnvironmentWriter(
-                ImmutableMap.<String, String>builder()
-                        .put("Browser", "Chrome")
-                        .put("Browser.Version", "111.0.5563.149")
-                        .put("URL", "https://translate.google.com")
-                        .build());
-    }
-
     @BeforeMethod
     public void setUp() {
         conf = ConfigFactory.create(Prop.class);
