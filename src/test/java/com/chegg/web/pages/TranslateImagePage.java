@@ -4,6 +4,8 @@ import com.chegg.web.core.BasePage;
 import com.microsoft.playwright.Download;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.qameta.allure.Step;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,16 +22,13 @@ public class TranslateImagePage {
         el = new BasePage(page);
     }
 
-    public SourceLangPage openSourceLangList() {
-        el.getByRole(AriaRole.BUTTON, "More source languages").click();
-        return new SourceLangPage(page);
-    }
-
+    @Step("target lang list")
     public TargetLangPage openTargetLangList() {
         el.getByRole(AriaRole.BUTTON, "More target languages").click();
         return new TargetLangPage(page);
     }
 
+    @Step("btn detect lang")
     public TranslateImagePage setDetectLang() {
         if(!isButtonDetectedLangSelected().equals("true")) {
             el.clickBy(btnDetectLang);
@@ -37,10 +36,12 @@ public class TranslateImagePage {
         return this;
     }
 
+    @Step("is button detected lang selected")
     private String isButtonDetectedLangSelected() {
         return el.getByRole(AriaRole.TAB, "Detect language").getAttribute("aria-selected");
     }
 
+    @Step("load Image")
     public TranslateImagePage loadImage() {
         el.getByRole(AriaRole.MAIN, "Image translation")
                 .getByText("Browse your computer")
@@ -49,10 +50,12 @@ public class TranslateImagePage {
         return this;
     }
 
+    @Step("is translation equals to")
     public boolean isTranslationEqualsTo(String word) {
         return el.getLocator("img[alt='"+word+"']").isVisible();
     }
 
+    @Step("download translation")
     public boolean downloadTranslation() {
         Download downloadedFile = page.waitForDownload(() -> {
                 el.getByRole(AriaRole.BUTTON, "Download translation").click();

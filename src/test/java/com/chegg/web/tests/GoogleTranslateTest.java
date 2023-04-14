@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
-//@Listeners({AllureTestNg.class})
+
 @Epic("Google Translate")
 public class GoogleTranslateTest extends BaseTest {
 

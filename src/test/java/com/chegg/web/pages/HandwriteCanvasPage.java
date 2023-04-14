@@ -4,6 +4,7 @@ import com.chegg.web.core.BasePage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.qameta.allure.Step;
 
 public class HandwriteCanvasPage {
     private Page page;
@@ -19,16 +20,16 @@ public class HandwriteCanvasPage {
         textArea = el.getByRole(AriaRole.COMBOBOX, "Source text");
     }
 
-        public HandwriteCanvasPage writeOnCanvas() {
-            for (int i = 58; i < 100; i++) {
-
-                el.clickWithCoordinate("canvas", 86, i);
-            }
-//        el.clickWithCoordinate("canvas", 86, 126);
+    @Step("write on canvas")
+    public HandwriteCanvasPage writeOnCanvas() {
+        for (int i = 58; i < 100; i++) {
+            el.clickWithCoordinate("canvas", 86, i);
+        }
         textArea.click();
         return this;
     }
 
+    @Step
     public HandwriteCanvasPage canvasClickEnter() {
         el.clickBy(canvasEnter);
         return this;

@@ -5,6 +5,7 @@ import com.chegg.web.core.utill.LangList;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.qameta.allure.Step;
 
 public class SourceLangPage {
     Page page;
@@ -17,7 +18,7 @@ public class SourceLangPage {
         searchLangInput = el.getByRole(AriaRole.TEXTBOX,"Search languages");
     }
 
-
+    @Step("search lang and pick")
     public boolean searchLangAndPick(LangList lang)  {
         searchLangInput.fill(lang.name());
         el.clickBy("//span[contains(text(), '"+lang.name()+"')]/ancestor::div[@data-language-code]");

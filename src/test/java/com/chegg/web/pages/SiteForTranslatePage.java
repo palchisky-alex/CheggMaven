@@ -4,6 +4,7 @@ import com.chegg.web.core.BasePage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import io.qameta.allure.Step;
 
 public class SiteForTranslatePage {
     private Page page;
@@ -16,6 +17,7 @@ public class SiteForTranslatePage {
         el = new BasePage(page);
     }
 
+    @Step("verify translated word")
     public boolean verifyTranslatedWord(String word) {
         boolean isTranslatedWord = false;
         if (title.isVisible()) {
