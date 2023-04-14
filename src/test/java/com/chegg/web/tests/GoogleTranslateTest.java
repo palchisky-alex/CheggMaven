@@ -4,11 +4,8 @@ import com.chegg.web.core.BaseTest;
 import com.chegg.web.core.utill.Keys;
 import com.chegg.web.core.utill.LangList;
 import com.chegg.web.pages.*;
-import com.microsoft.playwright.Page;
 import io.qameta.allure.*;
-import io.qameta.allure.testng.AllureTestNg;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static io.qameta.allure.Allure.step;

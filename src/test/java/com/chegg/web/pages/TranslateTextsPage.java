@@ -34,12 +34,14 @@ public class TranslateTextsPage {
         el.getByRole(AriaRole.BUTTON, "More target languages").click();
         return new TargetLangPage(page);
     }
+
     @Step("type text in text area")
     public TranslateTextsPage typeText(String text) {
         textArea.type(text);
         page.waitForTimeout(500);
         return this;
     }
+
     @Step("get translation result")
     public String getTranslationResult() {
         page.waitForTimeout(1000);
@@ -52,9 +54,10 @@ public class TranslateTextsPage {
         page.waitForTimeout(500);
         return this;
     }
+
     @Step("open handwrite canvas")
     public HandwriteCanvasPage openHandwriteCanvas() {
-        if(!el.isVisible("canvas")) {
+        if (!el.isVisible("canvas")) {
             el.getByRole(AriaRole.BUTTON, "Show the Input Tools menu").click();
             el.getByTexts("Handwrite").click();
             textArea.type(" ");
@@ -62,7 +65,6 @@ public class TranslateTextsPage {
 
         return new HandwriteCanvasPage(page);
     }
-
 
 
 }

@@ -12,7 +12,7 @@ public class TargetLangPage {
     private BasePage el;
     private Locator searchLangInput;
 
-    public TargetLangPage(Page page)  {
+    public TargetLangPage(Page page) {
         this.page = page;
         el = new BasePage(page);
         searchLangInput = el.getByRole(AriaRole.TEXTBOX, "Search languages");
@@ -20,9 +20,9 @@ public class TargetLangPage {
 
 
     @Step("search lang and pick")
-    public boolean searchLangAndPick(LangList lang)  {
+    public boolean searchLangAndPick(LangList lang) {
         searchLangInput.fill(lang.name());
-        el.clickBy("//span[contains(text(), '"+lang.name()+"')]/ancestor::div[@data-language-code]");
+        el.clickBy("//span[contains(text(), '" + lang.name() + "')]/ancestor::div[@data-language-code]");
         el.waitForTimeout(2000);
         return searchLangInput.isVisible();
     }

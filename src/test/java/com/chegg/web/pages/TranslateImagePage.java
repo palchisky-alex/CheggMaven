@@ -15,7 +15,7 @@ public class TranslateImagePage {
     private BasePage el;
     private String btnDetectLang = "(//button[@data-language-code='auto'])[1]";
     private String imageForTranslationPath = "src/test/resources/translate.jpg";
-    private String downloadedFilePath = "src/test/resources/translate_"+Math.random()+".jpg";
+    private String downloadedFilePath = "src/test/resources/translate_" + Math.random() + ".jpg";
 
     public TranslateImagePage(Page page) {
         this.page = page;
@@ -30,7 +30,7 @@ public class TranslateImagePage {
 
     @Step("btn detect lang")
     public TranslateImagePage setDetectLang() {
-        if(!isButtonDetectedLangSelected().equals("true")) {
+        if (!isButtonDetectedLangSelected().equals("true")) {
             el.clickBy(btnDetectLang);
         }
         return this;
@@ -45,20 +45,21 @@ public class TranslateImagePage {
     public TranslateImagePage loadImage() {
         el.getByRole(AriaRole.MAIN, "Image translation")
                 .getByText("Browse your computer")
-                .setInputFiles(Paths.get(imageForTranslationPath));;
+                .setInputFiles(Paths.get(imageForTranslationPath));
+        ;
         el.waitForTimeout(2000);
         return this;
     }
 
     @Step("is translation equals to")
     public boolean isTranslationEqualsTo(String word) {
-        return el.getLocator("img[alt='"+word+"']").isVisible();
+        return el.getLocator("img[alt='" + word + "']").isVisible();
     }
 
     @Step("download translation")
     public boolean downloadTranslation() {
         Download downloadedFile = page.waitForDownload(() -> {
-                el.getByRole(AriaRole.BUTTON, "Download translation").click();
+            el.getByRole(AriaRole.BUTTON, "Download translation").click();
         });
         Path filePath = downloadedFile.path();
         downloadedFile.saveAs(Paths.get(downloadedFilePath));
