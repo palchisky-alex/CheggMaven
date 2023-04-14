@@ -56,4 +56,8 @@ jobs:
         PERSONAL_TOKEN: ${{ secrets.CHEGG }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
+        
+      steps:
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.username }
       
