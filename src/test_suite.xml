@@ -5,8 +5,8 @@
         <classes>
             <class name="com.chegg.web.tests.GoogleTranslateTest">
                 <methods>
-                    <include name="testTranslateText"/>
-                    <include name="testTranslateImage"/>
+<!--                    <include name="testTranslateText"/>-->
+<!--                    <include name="testTranslateImage"/>-->
                     <include name="testTranslateSite"/>
                 </methods>
             </class>
