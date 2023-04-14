@@ -29,8 +29,8 @@ public class HandwriteCanvasPage {
         return this;
     }
 
-    @Step
-    public HandwriteCanvasPage canvasClickEnter() {
+    @Step("canvas click submit")
+    public HandwriteCanvasPage canvasSubmitImage() {
         el.clickBy(canvasEnter);
         return this;
     }
