@@ -6,9 +6,15 @@ import com.chegg.web.pages.SiteForTranslatePage;
 import com.chegg.web.pages.SourceLangPage;
 import com.chegg.web.pages.TargetLangPage;
 import com.chegg.web.pages.TranslateTextsPage;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import javax.script.ScriptException;
+
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -180,15 +186,30 @@ public class GoogleTranslateTest extends BaseTest {
     @AllureId("1")
     @Owner("admin")
     public void testName() {
-        step("Navigate to https://translate.google.com");
-        step("Init translate text", () -> {
-            step("Open Source Language list");
-            step("Search for the desired language and choose it");
-            step("Open Target Language list");
-            step("Search for the desired language and choose it");
-            step("Type text in the selected language");
-            step("Verify translation");
-        });
+//        step("Navigate to https://translate.google.com");
+//        MainPage google = app.navigate().toGoogleTranslateSite();
+//
+//        translateTexts = google.translateText();
+//        SourceLangPage srcLang = translateTexts.openSourceLangList();
+//        boolean isSourceClosed = srcLang.searchLangAndPick(LangList.English);
+//        TargetLangPage trgList = translateTexts.openTargetLangList();
+//        boolean isTargetClosed = trgList.searchLangAndPick(LangList.Italian);
+//
+//
+//        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Show the Input Tools menu")).click();
+//        page.getByText("English - Handwrite").click();
+//
+//        page.locator("canvas").click(new Locator.ClickOptions()
+//                .setPosition(86, 58).setPosition(88, 126));
+//
+//        page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Source text")).click();
+//
+//        page.getByText("i", new Page.GetByTextOptions().setExact(true)).first().click();
+//        page.locator(".goog-container > div:nth-child(4)").click();
+//
+//        assertThat(translateTexts.translationResult())
+//                .as("is the text translated correctly").contains("io");
+
     }
 
     @DataProvider(name = "translate_data")
