@@ -6,6 +6,23 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    
+  workflow_dispatch:
+    inputs:
+      TEST_ENDPOINT: #this is used as ENV variable to provide host to run tests for
+        description: "Endpoint for tests"
+        required: true
+        default: https://alexp.testops.cloud/
+      TEST_BROWSER: #this is used as ENV variable to browser to run tests with
+        description: "Browser for tests"
+        required: true
+        default: chrome
+      ALLURE_JOB_RUN_ID: # this will be used to generate Launch name on Allure TestOps side
+        description: "Allure TestOps service parameter, leave blank"
+        required: false
+      ALLURE_USERNAME:
+        description: "Allure TestOps service parameter, leave blank"
+        required: false
 
 env:
   ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
