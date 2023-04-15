@@ -5,7 +5,6 @@ import com.microsoft.playwright.*;
 import io.qameta.allure.Allure;
 import org.aeonbits.owner.ConfigFactory;
 import org.testng.ITestResult;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -51,7 +50,9 @@ public class PlaywrightFactory {
         tlBrowser.set(getTlPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome")
                 .setArgs(Collections.singletonList("--remote-debugging-port=9222"))
                 .setSlowMo(conf.sloMotion())
-                .setHeadless(conf.mode())));
+                .setHeadless(conf.browserMode())));
+
+//        tlBrowser.set(getTlPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(conf.browserMode())));
 
         tlContext.set(getTlBrowser().newContext(new Browser.NewContextOptions()
                 .setLocale(conf.local())

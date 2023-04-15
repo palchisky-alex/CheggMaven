@@ -1,19 +1,16 @@
 package com.chegg.web.core;
-
 import com.chegg.web.core.utill.Prop;
-import com.chegg.web.pages.*;
-import com.google.common.collect.ImmutableMap;
+import com.chegg.web.pages.HomePage;
 import com.microsoft.playwright.Page;
 import org.aeonbits.owner.ConfigFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 
 public class BaseTest {
     PlaywrightFactory pf;
@@ -26,6 +23,7 @@ public class BaseTest {
         conf = ConfigFactory.create(Prop.class);
         pf = new PlaywrightFactory();
         page = pf.initBrowser();
+        assertThat(page.request().get(conf.basicHost())).isOK();
         app = new HomePage(page);
     }
 

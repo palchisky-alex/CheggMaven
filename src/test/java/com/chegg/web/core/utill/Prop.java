@@ -11,7 +11,7 @@ public interface Prop extends Config {
     String siteForTranslation();
 
     @Key("headless.browser.mode")
-    Boolean mode();
+    Boolean browserMode();
 
     @Key("slow.motion")
     Integer sloMotion();
