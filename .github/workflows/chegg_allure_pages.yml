@@ -111,5 +111,5 @@ jobs:
         run: ./allurectl watch -- ./gradlew test # allows sending the test results in the real time 
         env:
           ALLURE_JOB_UID: ${{steps.allure-job-uid.outputs.result}}
-          TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
+          TEST_ENDPOINT: https://github.com/palchisky-alex/CheggMaven
           TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
