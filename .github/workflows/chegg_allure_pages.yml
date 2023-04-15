@@ -51,5 +51,26 @@ jobs:
         PERSONAL_TOKEN: ${{ secrets.CHEGG }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
+  
+  allure-testops:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Allure Testops
+      uses: allure-framework/allure-testops-action@v1
+      with:
+        endpoint: ${{ env.ALLURE_ENDPOINT }}
+        token: ${{ secrets.ALLURE_TOKEN }}
+        project-id: ${{ secrets.ALLURE_PROJECT_ID }}
+        results-directory: ${{ env.ALLURE_RESULTS }}
+        test-plan-path: ${{ env.ALLURE_TESTPLAN_PATH }}
+        job-run-id: ${{ env.ALLURE_JOB_RUN_ID }}
+        github-run-url: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
+        github-job-url: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}#job${{ github.job }}
+    env:
+      TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
+      TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
         
       
