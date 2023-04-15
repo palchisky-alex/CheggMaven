@@ -1,0 +1,5 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"Google Translate","translate text from any image","the user has the ability to translate the text from image","1","0","0","0","0"
+"Google Translate","translate website text","the user has the ability to translate site text","0","0","1","0","0"
+"Google Translate","translate text from any language","the user has the ability to translate the text","0","0","4","0","0"
+"Google Translate","translate text from handwrite canvas","the user has the ability to translate the text","0","0","1","0","0"
