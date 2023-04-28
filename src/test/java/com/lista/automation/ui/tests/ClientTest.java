@@ -5,7 +5,6 @@ import com.lista.automation.api.pojo.client.ClientGetResponse;
 import com.lista.automation.ui.core.BaseTest;
 import io.qameta.allure.Epic;
 import org.testng.annotations.Test;
-
 import static com.lista.automation.ui.core.utils.BasePage.generateClient;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
